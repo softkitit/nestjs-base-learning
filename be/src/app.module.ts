@@ -4,6 +4,7 @@ import {JwtModule} from '@nestjs/jwt';
 import {PassportModule} from '@nestjs/passport';
 import {ScheduleModule} from '@nestjs/schedule';
 import {TypeOrmModule} from '@nestjs/typeorm';
+import {JwtStrategy} from 'auth/strategy/jwt.strategy';
 import * as Services from 'service/';
 import * as Controllers from 'controllers/';
 import * as Repositories from 'repository/';
@@ -32,12 +33,13 @@ import * as Resolvers from './resolvers';
     PassportModule,
     JwtModule.register({
       secret: REFRESH_TOKEN_SECRET,
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '3600s' },
     }),
     HttpModule
   ],
   controllers: [...Object.values(Controllers)],
   providers: [
+    JwtStrategy,
     DateScalar,
     ...Object.values(Services),
     ...Object.values(Repositories),
@@ -47,3 +49,4 @@ import * as Resolvers from './resolvers';
 })
 export class AppModule {
 }
+

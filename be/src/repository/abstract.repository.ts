@@ -15,14 +15,14 @@ export class AbstractRepository<T> implements OnModuleInit {
     return this.mongoRepository.save(user);
   }
 
-  public async findOnById(id: string): Promise<T | null> {
-    const result = await this.mongoRepository.findByIds([id]);
+  public async findOneById(id: string): Promise<T | null> {
+    const result = await this.mongoRepository.findOne({
+      where: {
+        _id: id
+      }
+    });
 
-    if (result.length === 0) {
-      return null;
-    } else {
-      return result[0];
-    }
+    return result;
   }
 
   onModuleInit(): any {

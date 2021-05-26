@@ -14,7 +14,7 @@ export class UserService {
   }
 
   async findOneById(id: string): Promise<User | null> {
-    return this.userRepository.findOnById(id);
+    return this.userRepository.findOneById(id);
   }
 
   async save(user: User): Promise<User> {
