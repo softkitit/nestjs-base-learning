@@ -1,15 +1,8 @@
-import { Column, Entity, ObjectIdColumn } from 'typeorm';
+import {Expose, plainToClass} from 'class-transformer';
+import {Column, Entity, ObjectIdColumn} from 'typeorm';
 import * as uuid from 'uuid';
-import { Expose, plainToClass } from 'class-transformer';
 
-import {
-  Facebook,
-  Gender,
-  Google,
-  Crowd,
-  Local,
-  UserType
-} from '../generator/graphql.schema';
+import {Gender, Local, UserType} from '../generator/graphql.schema';
 
 @Entity({
   name: 'users',
@@ -25,18 +18,6 @@ export class User {
   @Expose()
   @Column()
   local: Local;
-
-  @Expose()
-  @Column()
-  google: Google;
-
-  @Expose()
-  @Column()
-  crowd: Crowd;
-
-  @Expose()
-  @Column()
-  facebook: Facebook;
 
   @Expose()
   @Column()
@@ -113,8 +94,6 @@ export class User {
       this.isVerified =
         this.isVerified !== undefined
           ? this.isVerified
-          : this.google || this.facebook || this.crowd
-          ? true
           : false;
       this.isOnline = this.isOnline !== undefined ? this.isOnline : false;
       this.isLocked = this.isLocked !== undefined ? this.isLocked : false;

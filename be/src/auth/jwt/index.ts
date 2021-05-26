@@ -73,14 +73,7 @@ export const generateToken = async (
     common[type].privateKey,
     {
       issuer: ISSUER!,
-      subject: user.local
-        ? user.local.email
-        : user.crowd
-        ? user.crowd.email
-        : user.google
-        ? user.google.email
-        : user.facebook.email
-      ,
+      subject: user.local.email,
       audience: AUDIENCE!,
       algorithm: 'HS256',
       expiresIn: common[type].signOptions.expiresIn // 15m
@@ -105,29 +98,7 @@ export const verifyToken = async (
   token: string,
   type: TokenType
 ): Promise<User> => {
-  let currentUser;
-
-  await verify(token, common[type].privateKey, async (err, data) => {
-    if (err) {
-      throw new AuthenticationError(
-        'Authentication token is invalid, please try again.'
-      );
-    }
-
-    currentUser = await getMongoRepository(User).findOne({
-      _id: data._id
-    });
-  });
-
-  if (type === 'emailToken') {
-    return currentUser;
-  }
-
-  if (currentUser && !currentUser.isVerified) {
-    throw new ForbiddenError('Please verify your email.');
-  }
-
-  return currentUser;
+  return null;
 };
 
 /**
