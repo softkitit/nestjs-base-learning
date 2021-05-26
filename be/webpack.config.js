@@ -34,7 +34,6 @@ module.exports = {
 			'@environments': path.resolve(__dirname, './src/environments'),
 			'@models': path.resolve(__dirname, './src/models'),
 			'@utils': path.resolve(__dirname, './src/utils'),
-			'@validations': path.resolve(__dirname, './src/validations')
 		},
 		extensions: ['.tsx', '.ts', '.js']
 	},

@@ -16,7 +16,6 @@ import {
   TimeoutInterceptor,
   ValidationPipe
 } from '@common';
-import '@validations';
 
 import {
   DOMAIN,

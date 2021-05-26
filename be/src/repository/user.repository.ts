@@ -13,7 +13,7 @@ export class UserRepository extends AbstractRepository<User> {
 
     return this.mongoRepository.findOne({
       where: {
-        'local.email': email
+        email
       }
     });
   }

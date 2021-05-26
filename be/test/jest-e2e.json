@@ -14,7 +14,6 @@
 		"^@models(.*)$": "<rootDir>/../src/models$1",
 		"^@shared(.*)$": "<rootDir>/../src/shared$1",
 		"^@utils(.*)$": "<rootDir>/../src/utils$1",
-		"^@validations(.*)$": "<rootDir>/../src/validations$1",
 		"^@environments(.*)": "<rootDir>/../src/environments$1"
 	}
 }

@@ -17,7 +17,7 @@ export class AuthService {
   async validateUser(email: string, pass: string): Promise<User> {
     const user = await this.userService.findOneByEmail(email);
 
-    const passwordMatch = await comparePassword(pass, user.local.password);
+    const passwordMatch = await comparePassword(pass, user.password);
     
     if (user && passwordMatch) {
       return user;
@@ -28,7 +28,7 @@ export class AuthService {
 
   async login(email: string, password: string): Promise<string> {
     const payload = await this.validateUser(email, password);
-    return this.jwtService.sign({username: payload.local.email, sub: payload._id});
+    return this.jwtService.sign({username: payload.email, sub: payload._id});
   }
 
   async signup(user: UserInput): Promise<User> {
@@ -40,8 +40,8 @@ export class AuthService {
 
     const userToSave = new User(user);
     const password = await hashPassword(user.password);
+    userToSave.password = password;
     
-    userToSave.local = {email: user.email, password};
     return this.userService.save(userToSave);
   }
 

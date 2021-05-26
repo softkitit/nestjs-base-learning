@@ -30,10 +30,9 @@ export class UserController {
   async me(@Request() req): Promise<User> {
     const user = req.user;
     const userResult = await this.userService.findOneById(user.userId);
-    if(userResult.local) {
-      userResult.local.password = null;
-    }
-    return userResult as User;
+    userResult.password = null;
+    
+    return userResult;
   }
 
 }

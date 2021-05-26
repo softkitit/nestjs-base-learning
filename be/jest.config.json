@@ -14,7 +14,6 @@
 		"^@config(.*)$": "<rootDir>/src/config$1",
 		"^@environments(.*)$": "<rootDir>/src/environments$1",
 		"^@models(.*)$": "<rootDir>/src/models$1",
-		"^@utils(.*)$": "<rootDir>/src/utils$1",
-		"^@validations(.*)$": "<rootDir>/src/validations$1"
+		"^@utils(.*)$": "<rootDir>/src/utils$1"
 	}
 }

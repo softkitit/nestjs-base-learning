@@ -21,7 +21,6 @@
 			"@environments": ["environments"],
 			"@models": ["models"],
 			"@utils": ["utils"],
-			"@validations": ["validations"]
 		}
 	},
 	"include": ["src/**/*.ts", "src/**/*.js" , "src/services/reviews/index.js"],
