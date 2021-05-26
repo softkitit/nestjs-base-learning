@@ -31,7 +31,7 @@ export class UserController {
     const user = req.user;
     const userResult = await this.userService.findOneById(user.userId);
     if(userResult.local) {
-      userResult.local = null;
+      userResult.local.password = null;
     }
     return userResult as User;
   }

@@ -8,22 +8,15 @@ import {JwtStrategy} from 'auth/strategy/jwt.strategy';
 import * as Services from 'service/';
 import * as Controllers from 'controllers/';
 import * as Repositories from 'repository/';
-import {CacheService, GraphqlService, TypeOrmService} from './config';
-import {DateScalar} from './config/graphql/scalars/date.scalar';
-import {UploadScalar} from './config/graphql/scalars/upload.scalar';
+import {CacheService, TypeOrmService} from './config';
 
 import {
   REFRESH_TOKEN_SECRET
 } from '@environments';
 
-import * as Resolvers from './resolvers';
-
 @Module({
   imports: [
     ScheduleModule.forRoot(),
-    GraphQLModule.forRootAsync({
-      useClass: GraphqlService
-    }),
     TypeOrmModule.forRootAsync({
       useClass: TypeOrmService
     }),
@@ -40,11 +33,8 @@ import * as Resolvers from './resolvers';
   controllers: [...Object.values(Controllers)],
   providers: [
     JwtStrategy,
-    DateScalar,
     ...Object.values(Services),
     ...Object.values(Repositories),
-    UploadScalar,
-    ...Object.values(Resolvers),
   ]
 })
 export class AppModule {
