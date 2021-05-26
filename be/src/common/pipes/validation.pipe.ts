@@ -1,4 +1,4 @@
-import { ArgumentMetadata, Injectable, PipeTransform } from '@nestjs/common';
+import {ArgumentMetadata, HttpException, HttpStatus, Injectable, PipeTransform} from '@nestjs/common';
 import { validate } from 'class-validator';
 import { plainToClass } from 'class-transformer';
 import { UserInputError } from 'apollo-server-core';
@@ -13,9 +13,9 @@ export class ValidationPipe implements PipeTransform<any> {
     const object = plainToClass(metatype, value);
     const errors = await validate(object);
     if (errors.length > 0) {
-      throw new UserInputError(
-        `Form Arguments invalid: ${this.formatErrors(errors)}`
-      );
+      const errorsFormatted = errors.map(error => ({[error.property]: Object.values(error.constraints)}));
+      
+      throw new HttpException(errorsFormatted, HttpStatus.BAD_REQUEST);
     }
     return value;
   }
