@@ -1,4 +1,5 @@
-import { NestFactory } from '@nestjs/core';
+import {NestFactory, Reflector} from '@nestjs/core';
+import {RolesGuard} from 'auth/guards/roles.guard';
 import { AppModule } from './app.module';
 import { Logger } from '@nestjs/common';
 import { express as voyagerMiddleware } from 'graphql-voyager/middleware';
@@ -103,6 +104,7 @@ async function bootstrap() {
     app.useGlobalInterceptors(new TimeoutInterceptor());
 
     // NOTE: global nest setup
+    app.useGlobalGuards(new RolesGuard(new Reflector()));
     app.useGlobalPipes(new ValidationPipe());
 
     app.enableShutdownHooks();

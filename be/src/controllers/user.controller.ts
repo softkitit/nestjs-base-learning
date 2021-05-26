@@ -1,6 +1,7 @@
-import {Body, Controller, Request, Post, Query, UseGuards,} from '@nestjs/common';
+import {Body, Controller, Request, Post, Query, UseGuards, SetMetadata,} from '@nestjs/common';
 import {JwtAuthGuard} from 'auth/guards/jwt-auth.guard';
-import {User, UserInput} from 'generator';
+import {AdminRoleGuard, Public} from 'controllers/abstract.controller';
+import {Role, User, UserInput} from 'generator';
 import {AuthService, UserService} from 'service';
 
 @Controller('/users')
@@ -12,6 +13,7 @@ export class UserController {
   ) {
   }
 
+  @Public()
   @Post('/signin')
   async signIn(@Query('username') username: string,
                @Query('password') password: string
@@ -19,13 +21,14 @@ export class UserController {
     return this.authService.login(username, password);
   }
 
+  @Public()
   @Post('/signup')
   async signUp(@Body() ui: UserInput): Promise<String> {
     const savedUser = await this.authService.signup(ui);
     return this.authService.login(ui.email, ui.password);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @AdminRoleGuard
   @Post('/me')
   async me(@Request() req): Promise<User> {
     const user = req.user;

@@ -17,10 +17,12 @@ export class AuthService {
   async validateUser(email: string, pass: string): Promise<User> {
     const user = await this.userService.findOneByEmail(email);
 
-    const passwordMatch = await comparePassword(pass, user.password);
+    if(user) {
+      const passwordMatch = await comparePassword(pass, user?.password);
     
-    if (user && passwordMatch) {
-      return user;
+      if (passwordMatch) {
+        return user;
+      }
     }
     
     throw new HttpException("User is invalid", HttpStatus.BAD_REQUEST);
@@ -28,7 +30,7 @@ export class AuthService {
 
   async login(email: string, password: string): Promise<string> {
     const payload = await this.validateUser(email, password);
-    return this.jwtService.sign({username: payload.email, sub: payload._id});
+    return this.jwtService.sign({username: payload.email, sub: payload._id, roles: payload.roles});
   }
 
   async signup(user: UserInput): Promise<User> {
