@@ -1,14 +1,19 @@
 # Nestjs GraphQL Best Practice
 
 > ### NestJS (Express + Typeorm) codebase containing real world examples (CRUD, auth, advanced patterns, etc).
+# Spring Boot Learning Starter
 
-[![Build Status](https://travis-ci.org/chnirt/nestjs-graphql-best-practice.svg?branch=cicd)](https://travis-ci.org/chnirt/nestjs-graphql-best-practice)
-[![CircleCI](https://circleci.com/gh/chnirt/nestjs-graphql-best-practice/tree/cicd.svg?style=svg)](https://circleci.com/gh/chnirt/nestjs-graphql-best-practice/tree/cicd)
-[![Known Vulnerabilities](https://snyk.io//test/github/chnirt/nestjs-graphql-best-practice/badge.svg?targetFile=package.json)](https://snyk.io//test/github/chnirt/nestjs-graphql-best-practice?targetFile=package.json)
-[![Greenkeeper badge](https://badges.greenkeeper.io/chnirt/nestjs-graphql-best-practice.svg)](https://greenkeeper.io/)
-[![Coverage Status](https://coveralls.io/repos/github/chnirt/nestjs-graphql-best-practice/badge.svg)](https://coveralls.io/github/chnirt/nestjs-graphql-best-practice)
+![](https://img.shields.io/badge/build-success-brightgreen.svg)
 
-<img src="src/assets/images/project-logo.png" alt="Node.js Best Practices">
+# Stack
+
+![](https://img.shields.io/badge/node_12-✓-blue.svg)
+![](https://img.shields.io/badge/nestjs-✓-blue.svg)
+![](https://img.shields.io/badge/mongo-✓-blue.svg)
+![](https://img.shields.io/badge/jwt-✓-blue.svg)
+![](https://img.shields.io/badge/typeorm-✓-blue.svg)
+![](https://img.shields.io/badge/jest-✓-green.svg)
+
 
 ## Table of Contents
 
@@ -25,39 +30,13 @@
   - [6. Security Best Practices](#6-security-best-practices)
   - [7. Performance Best Practices](#7-performance-best-practices)
 
-## Structure
 
-<img src="src/assets/images/structure.png" alt="Node.js Best Practices" width="250"/>
 
-## Function
+***
 
-1. Dynamic import
-2. Authenticate
-   - Config jwt like OAuth ( access-token, refresh-token )
-   - OAuth Google
-   - OAuth Facebook
-3. Dump database
-   - Child process
-4. Logger
-   - NestJs
-   - Wiston
-5. Send mail
-   - Nodemailer
-6. Payment
-   - Stripe
-7. Task scheduler
-   - Timeout
-   - Interval
-   - Cron
-8. Translate
-   - Google translate
-9. Upload file
-   - Cloudinary
-   - Fs createWriteStream to folder static
-10. Test
-    - Unit
-    - E2e
-    - Coverage
+<h3 align="center">Please help this repo with a :star: if you find it useful! :blush:</h3>
+
+***
 
 ## Usage
 
@@ -73,18 +52,6 @@
   cd nestjs-graphql-best-practice/
 ```
 
-3. Create .env
-
-```
-  touch .env
-```
-
-4. Add to .env
-
-```
-  PORT=<yourport>
-```
-
 5. Install dependencies using npm
 
 ```
@@ -93,215 +60,312 @@
 
 ## Starting the Server
 
-1. Generate graphql.schema.ts
 
-```
-  npm run gen
-```
-
-2.1 Start in development normal
+1. Start in development normal
 
 ```
   npm run start:dev
 ```
 
-2.2 Start with webpack ( 2 terminal view )
+2. Start with webpack ( 2 terminal view )
 
 ```
   npm run webpack
   npm run start:hmr
 ```
 
-<a href="https://www.buymeacoffee.com/YT6K1FI" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px; border-radius: 5px; !important;" ></a>
 
-## Node.js Best Practices
+# File structure
+
+```
+nodejs-nest-backend-base/be
+├── Dockerfile
+├── LICENSE
+├── Procfile
+├── README.md
+├── be.iml
+├── docker-compose.yml
+├── files
+|     └── postman_collection.json
+├── jest.config.json
+├── nest-cli.json
+├── nodemon-debug.json
+├── nodemon.json
+├── package-lock.json
+├── package.json
+├── src
+|     ├── app.module.ts
+|     ├── app.processor.ts
+|     ├── auth
+|     |     ├── guards
+|     |     |     ├── jwt-auth.guard.ts
+|     |     |     └── roles.guard.ts
+|     |     └── strategy
+|     |         └── jwt.strategy.ts
+|     ├── bootstrap.ts
+|     ├── common
+|     |     ├── filters
+|     |     |     └── http-exception.filter.ts
+|     |     ├── index.ts
+|     |     ├── interceptors
+|     |     |     ├── exception.interceptor.ts
+|     |     |     ├── http-cache.interceptor.ts
+|     |     |     ├── logging.interceptor.ts
+|     |     |     ├── timeout.interceptor.ts
+|     |     |     └── transform.interceptor.ts
+|     |     ├── middleware
+|     |     |     └── logger.middleware.ts
+|     |     ├── pipes
+|     |     |     └── validation.pipe.ts
+|     |     └── wiston
+|     |         └── index.ts
+|     ├── config
+|     |     ├── bull
+|     |     |     └── index.ts
+|     |     ├── cache
+|     |     |     └── index.ts
+|     |     ├── index.ts
+|     |     ├── logger
+|     |     |     └── index.ts
+|     |     └── typeorm
+|     |         └── index.ts
+|     ├── config.orm.ts
+|     ├── controllers
+|     |     ├── abstract.controller.ts
+|     |     ├── index.ts
+|     |     └── user.controller.ts
+|     ├── dbseed.ts
+|     ├── environments
+|     |     └── index.ts
+|     ├── generator
+|     |     ├── graphql.schema.ts
+|     |     └── index.ts
+|     ├── main.ts
+|     ├── metadata.ts
+|     ├── models
+|     |     ├── index.ts
+|     |     └── user.entity.ts
+|     ├── repository
+|     |     ├── abstract.repository.ts
+|     |     ├── index.ts
+|     |     └── user.repository.ts
+|     ├── service
+|     |     ├── auth.service.ts
+|     |     ├── index.ts
+|     |     └── user.service.ts
+|     └── utils
+|         ├── index.ts
+|         └── password
+|             └── index.ts
+├── test
+|     ├── app.e2e-spec.ts
+|     ├── jest-e2e.json
+|     └── user
+|         ├── user.e2e-spec.ts
+|         └── user.service.spec.ts
+├── tsconfig-paths-bootstrap.js
+├── tsconfig.build.json
+├── tsconfig.json
+├── tslint.json
+└── webpack.config.js
+
+```
+
+# Introduction (https://jwt.io)
+
+Just to throw some background in, we have a wonderful introduction, courtesy of **jwt.io**! Let’s take a look:
+
+## What is JSON Web Token?
 
-<h1 align="center">
-  <img src="src/assets/images/banner-2.jpg" alt="Node.js Best Practices">
-</h1>
+JSON Web Token (JWT) is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object. This information can be verified and trusted because it is digitally signed. JWTs can be signed using a secret (with the HMAC algorithm) or a public/private key pair using RSA.
 
-### 1. Project Structure Practices
+Let's explain some concepts of this definition further.
 
-[✔️] 1.1 Structure your solution by components
+**Compact**: Because of their smaller size, JWTs can be sent through a URL, POST parameter, or inside an HTTP header. Additionally, the smaller size means transmission is fast.
 
-[✔️] 1.2 Layer your components, keep Express within its boundaries
+**Self-contained**: The payload contains all the required information about the user, avoiding the need to query the database more than once.
 
-[✔️] 1.3 Wrap common utilities as npm packages
+## When should you use JSON Web Tokens?
 
-[❌] No neccessary - 1.4 Separate Express 'app' and 'server'
+Here are some scenarios where JSON Web Tokens are useful:
 
-[✔️] 1.5 Use environment aware, secure and hierarchical config
+**Authentication**: This is the most common scenario for using JWT. Once the user is logged in, each subsequent request will include the JWT, allowing the user to access routes, services, and resources that are permitted with that token. Single Sign On is a feature that widely uses JWT nowadays, because of its small overhead and its ability to be easily used across different domains.
 
-### 2. Error Handling Practices
+**Information Exchange**: JSON Web Tokens are a good way of securely transmitting information between parties. Because JWTs can be signed—for example, using public/private key pairs—you can be sure the senders are who they say they are. Additionally, as the signature is calculated using the header and the payload, you can also verify that the content hasn't been tampered with.
 
-[✔️] 2.1 Use Async-Await or promises for async error handling
+## What is the JSON Web Token structure?
 
-[✔️] 2.2 Use only the built-in Error object
+JSON Web Tokens consist of three parts separated by dots **(.)**, which are:
 
-![❔] 2.3 Distinguish operational vs programmer errors
+1. Header
+2. Payload
+3. Signature
 
-[✔️] 2.4 Handle errors centrally, not within an Express middleware
+Therefore, a JWT typically looks like the following.
 
-[✔️] 2.5 Document API errors using Swagger or GraphQL
+`xxxxx`.`yyyyy`.`zzzzz`
 
-[✔️] 2.6 Exit the process gracefully when a stranger comes to town
+Let's break down the different parts.
 
-[✔️] 2.7 Use a mature logger to increase error visibility
+**Header**
 
-[✔️️] use Jest - 2.8 Test error flows using your favorite test framework
+The header typically consists of two parts: the type of the token, which is JWT, and the hashing algorithm being used, such as HMAC SHA256 or RSA.
 
-![❔] 2.9 Discover errors and downtime using APM products
+For example:
 
-[✔️] 2.10 Catch unhandled promise rejections
+```json
+{
+  "alg": "HS256",
+  "typ": "JWT"
+}
+```
 
-[✔️] 2.11 Fail fast, validate arguments using a dedicated library
+Then, this JSON is Base64Url encoded to form the first part of the JWT.
 
-### 3. Code Style Practices
+**Payload**
 
-[❌] No neccessary - 3.1 Use ESLint
+The second part of the token is the payload, which contains the claims. Claims are statements about an entity (typically, the user) and additional metadata. There are three types of claims: reserved, public, and private claims.
 
-[❔] 3.2 Node.js specific plugins
+- **Reserved claims**: These are a set of predefined claims which are not mandatory but recommended, to provide a set of useful, interoperable claims. Some of them are: iss (issuer), exp (expiration time), sub (subject), aud (audience), and others.
 
-[✔️] 3.3 Start a Codeblock's Curly Braces on the Same Line
+> Notice that the claim names are only three characters long as JWT is meant to be compact.
 
-[✔️] 3.4 Separate your statements properly
+- **Public claims**: These can be defined at will by those using JWTs. But to avoid collisions they should be defined in the IANA JSON Web Token Registry or be defined as a URI that contains a collision resistant namespace.
 
-[✔️] 3.5 Name your functions
+- **Private claims**: These are the custom claims created to share information between parties that agree on using them.
 
-[✔️] 3.6 Use naming conventions for variables, constants, functions and classes
+An example of payload could be:
 
-[✔️] 3.7 Prefer const over let. Ditch the var
+```json
+{
+  "sub": "1234567890",
+  "name": "Vitalii Samofal",
+  "admin": true
+}
+```
 
-[✔️] 3.8 Require modules first, not inside functions
+The payload is then Base64Url encoded to form the second part of the JSON Web Token.
 
-[✔️] Nest must import files directly - 3.9 Require modules by folders, opposed to the files directly
+**Signature**
 
-[✔️] 3.10 Use the `===` operator
+To create the signature part you have to take the encoded header, the encoded payload, a secret, the algorithm specified in the header, and sign that.
 
-[✔️] 3.11 Use Async Await, avoid callbacks
+For example if you want to use the HMAC SHA256 algorithm, the signature will be created in the following way:
 
-[✔️] 3.12 Use arrow function expressions (=>)
+```
+HMACSHA256(
+  base64UrlEncode(header) + "." +
+  base64UrlEncode(payload),
+  secret)
+```
 
-### 4. Testing And Overall Quality Practices
+The signature is used to verify that the sender of the JWT is who it says it is and to ensure that the message wasn't changed along the way.
+Putting all together
 
-[✔️] 4.1 At the very least, write API (component) testing
+The output is three Base64 strings separated by dots that can be easily passed in HTML and HTTP environments, while being more compact when compared to XML-based standards such as SAML.
 
-[✔️] use Jest - 4.2 Include 3 parts in each test name
+The following shows a JWT that has the previous header and payload encoded, and it is signed with a secret. Encoded JWT
 
-[✔️] use Jest - 4.3 Structure tests by the AAA pattern
+![](https://camo.githubusercontent.com/a56953523c443d6a97204adc5e39b4b8c195b453/68747470733a2f2f63646e2e61757468302e636f6d2f636f6e74656e742f6a77742f656e636f6465642d6a7774332e706e67)
 
-[✔️] 4.4 Detect code issues with a linter
+## How do JSON Web Tokens work?
 
-[〽️] use Jest - 4.5 Avoid global test fixtures and seeds, add data per-test
+In authentication, when the user successfully logs in using their credentials, a JSON Web Token will be returned and must be saved locally (typically in local storage, but cookies can be also used), instead of the traditional approach of creating a session in the server and returning a cookie.
 
-[✔️] 4.6 Constantly inspect for vulnerable dependencies
+Whenever the user wants to access a protected route or resource, the user agent should send the JWT, typically in the Authorization header using the Bearer schema. The content of the header should look like the following:
 
-![❔] 4.7 Tag your tests
+`Authorization: Bearer <token>`
 
-[✔️] 4.8 Check your test coverage, it helps to identify wrong test patterns
+This is a stateless authentication mechanism as the user state is never saved in server memory. The server's protected routes will check for a valid JWT in the Authorization header, and if it's present, the user will be allowed to access protected resources. As JWTs are self-contained, all the necessary information is there, reducing the need to query the database multiple times.
 
-[✔️] 4.9 Inspect for outdated packages
+This allows you to fully rely on data APIs that are stateless and even make requests to downstream services. It doesn't matter which domains are serving your APIs, so Cross-Origin Resource Sharing (CORS) won't be an issue as it doesn't use cookies.
 
-[✔️] 4.10 Use production-like env for e2e testing
+The following diagram shows this process:
 
-[✔️] 4.11 Refactor regularly using static analysis tools
+![](https://camo.githubusercontent.com/5871e9f0234542cd89bab9b9c100b20c9eb5b789/68747470733a2f2f63646e2e61757468302e636f6d2f636f6e74656e742f6a77742f6a77742d6469616772616d2e706e67)
 
-[✔️] 4.12 Carefully choose your CI platform (Jenkins vs CircleCI vs Travis vs Rest of the world)
+# JWT Authentication Summary
 
-### 5. Going To Production Practices
+Token based authentication schema's became immensely popular in recent times, as they provide important benefits when compared to sessions/cookies:
 
-![❔] 5.1. Monitoring!
+- CORS
+- No need for CSRF protection
+- Better integration with mobile
+- Reduced load on authorization server
+- No need for distributed session store
 
-[✔️] 5.2. Increase transparency using smart logging
+Some trade-offs have to be made with this approach:
 
-![❔] 5.3. Delegate anything possible (e.g. gzip, SSL) to a reverse proxy
+- More vulnerable to XSS attacks
+- Access token can contain outdated authorization claims (e.g when some of the user privileges are revoked)
+- Access tokens can grow in size in case of increased number of claims
+- File download API can be tricky to implement
+- True statelessness and revocation are mutually exclusive
 
-[✔️] 5.4. Lock dependencies
+**JWT Authentication flow is very simple**
 
-![❔] 5.5. Guard process uptime using the right tool
+1. User obtains Refresh and Access tokens by providing credentials to the Authorization server
+2. User sends Access token with each request to access protected API resource
+3. Access token is signed and contains user identity (e.g. user id) and authorization claims.
 
-[✔️] 5.6. Utilize all CPU cores
+It's important to note that authorization claims will be included with the Access token. Why is this important? Well, let's say that authorization claims (e.g user privileges in the database) are changed during the life time of Access token. Those changes will not become effective until new Access token is issued. In most cases this is not big issue, because Access tokens are short-lived. Otherwise go with the opaque token pattern.
 
-[✔️] 5.7. Create a ‘maintenance endpoint’
+# Implementation Details
 
-[✔️] 5.8. Discover errors and downtime using APM products
+Let's see how can we implement the JWT token based authentication using Java and Spring, while trying to reuse the Spring security default behavior where we can. The Spring Security framework comes with plug-in classes that already deal with authorization mechanisms such as: session cookies, HTTP Basic, and HTTP Digest. Nevertheless, it lacks from native support for JWT, and we need to get our hands dirty to make it work.
 
-[✔️] 5.9. Make your code production-ready
+# How to use this code?
 
-![❔] 5.10. Measure and guard the memory usage
+1. Make sure you have [Node 12] and [Npm] installed
 
-[✔️] 5.11. Get your frontend assets out of Node
+2. Fork this repository and clone it
 
-![❔] 5.12. Be stateless, kill your servers almost every day
+```
+$ git clone https://github.com/<your-user>/spring-boot-base-learning
+```
 
-[✔️] 5.13. Use tools that automatically detect vulnerabilities
+3. Navigate into the folder
 
-![❔] 5.14. Assign a transaction id to each log statement
+```
+$ cd nodejs-nest-backend-base/be
+```
 
-[✔️] 5.15. Set NODE_ENV=production
+4. Install dependencies
 
-![❔] 5.16. Design automated, atomic and zero-downtime deployments
+```
+$ npm install
+```
 
-![❔] 5.17. Use an LTS release of Node.js
+5. Run the project
 
-![❔] 5.18. Don't route logs within the app
+```
+$ npm run start:dev
+```
 
-### 6. Security Best Practices
+6. Navigate to `http://localhost:14047/html` in your browser to check everything is working correctly. 
 
-[✔️] 6.1. Embrace linter security rules
+7. Make a GET request to `/users/me` to check you're not authenticated. You should receive a response with a `403` with an `Access Denied` message since you haven't set your valid JWT token yet
 
-[✔️] 6.2. Limit concurrent requests using a middleware
+```javascript
+{
+  "id": 1,
+  "username": "admin",
+  "email": "admin@email.com",
+  "roles": [
+    "ROLE_ADMIN"
+  ]
+}
+```
 
-[✔️] 6.3 Extract secrets from config files or use packages to encrypt them
+8. Import postman collection you can find it by path ``utils/postman_collection.json``. This collection includes base signup, signin and whoami endpoint calls. Also setting the header is automated there, so once you signed in you will be able to call whoami. You can check Tests tab on Signin method to understand how it's done there. Play with it, achive validation exceptions, set wrong email address for signup (e.g. without `@` symbol), see the result!
 
-[✔️] 6.4. Prevent query injection vulnerabilities with ORM/ODM libraries
 
-![❔] 6.5. Collection of generic security best practices
+Further instructions you will get from your mentor if you are part of our study class. If not then signup we will be glad to teach you, future senior developer ◉_◉. [Softkit Contact Us](https://softkitit.com/careers)
 
-[✔️] 6.6. Adjust the HTTP response headers for enhanced security
+# Contribution
 
-[✔️] 6.7. Constantly and automatically inspect for vulnerable dependencies
+- Report issues
+- Open pull request with improvements
+- Spread the word
+- Reach out to me directly at <vsamofal@softkitit.com>
 
-[✔️] 6.8. Avoid using the Node.js crypto library for handling passwords, use Bcrypt
-
-![❔] 6.9. Escape HTML, JS and CSS output
-
-[✔️] 6.10. Validate incoming JSON schemas
-
-![❔] 6.11. Support blacklisting JWTs
-
-![❔] 6.12. Prevent brute-force attacks against authorization
-
-[✔️] 6.13. Run Node.js as non-root user
-
-[✔️] 6.14. Limit payload size using a reverse-proxy or a middleware
-
-![❔] 6.15. Avoid JavaScript eval statements
-
-![❔] 6.16. Prevent evil RegEx from overloading your single thread execution
-
-[✔️] 6.17. Avoid module loading using a variable
-
-![❔] 6.18. Run unsafe code in a sandbox
-
-![❔] 6.19. Take extra care when working with child processes
-
-[✔️] 6.20. Hide error details from clients
-
-[✔️] 6.21. Configure 2FA for npm or Yarn
-
-[❌] No neccessary - 6.22. Modify session middleware settings
-
-![❔] 6.23. Avoid DOS attacks by explicitly setting when a process should crash
-
-[❌] No neccessary - 6.24. Prevent unsafe redirects
-
-[✔️] 6.25. Avoid publishing secrets to the npm registry
-
-### 7. Performance Best Practices
-
-Our contributors are working on this section. [Would you like to join?](https://github.com/i0natan/nodebestpractices/issues/256)
-
-[✔️] 7.1. Prefer native JS methods over user-land utils like Lodash
-
-[❔] 7.2. Use Fastify in place of Express

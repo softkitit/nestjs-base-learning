@@ -10,6 +10,9 @@
 .idea/
 softkit_sales.iml
 
+coverage/
+logs/
+
 dependencies
 /node_modules
 be/node_modules
