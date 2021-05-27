@@ -11,6 +11,14 @@ export class AbstractRepository<T> implements OnModuleInit {
     this.entity = entity;
   }
 
+  public async truncate() {
+    try {
+      await this.mongoRepository.clear();
+    } catch (e) {
+    //  noop, we don't care it only for tests
+    }
+  }
+
   public save(user: T): Promise<T> {
     return this.mongoRepository.save(user);
   }

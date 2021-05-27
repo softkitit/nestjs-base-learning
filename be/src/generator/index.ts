@@ -1,3 +1,1 @@
-
-
 export * from './graphql.schema'

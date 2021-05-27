@@ -23,7 +23,7 @@ export class UserController {
 
   @Public()
   @Post('/signup')
-  async signUp(@Body() ui: UserInput): Promise<String> {
+  async signUp(@Body() ui: UserInput): Promise<string> {
     const savedUser = await this.authService.signup(ui);
     return this.authService.login(ui.email, ui.password);
   }
