@@ -3,6 +3,7 @@
 	"moduleFileExtensions": ["js", "json", "ts"],
 	"testEnvironment": "node",
 	"testRegex": ".e2e-spec.ts$",
+	"testTimeout": 100000,
 	"transform": {
 		"^.+\\.ts$": "ts-jest"
 	},
