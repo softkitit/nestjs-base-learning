@@ -4,6 +4,7 @@ import {Test} from '@nestjs/testing';
 import {UserController} from 'controllers';
 import {Role, UserInput} from 'generator';
 import metadata from 'metadata';
+import {User} from 'models';
 import * as Repositories from 'repository';
 import {AuthService, UserService} from 'service';
 
@@ -101,6 +102,30 @@ describe('CatsController', () => {
 
     });
   });
+
+  /**
+   * this method is mocking call to database, to simulate that user already exists
+   * even if database is not set (so we don't have it up and running)
+   * so you can change return value to false and then it will try to signup
+   */
+  describe('mock signup', () => {
+    it('check that with mocking we cant do even a first signup', async () => {
+      const signUpUser: UserInput = getSignUpUser();
+
+      jest.spyOn(userService, 'findOneByEmail')
+        .mockImplementation(() => Promise.resolve(new User(signUpUser)));
+
+      try {
+        const signupToken = await userController.signUp(signUpUser);
+      } catch (e) {
+        expect(e.message).toBe('User with such email already exists');
+        return;
+      }
+      
+      throw "Looks like mock doesn't work! Test Failed!";
+    });
+  });
+  
   
   
 });
