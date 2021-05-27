@@ -20,5 +20,17 @@ export class UserService {
   async save(user: User): Promise<User> {
     return this.userRepository.save(user);
   }
+  
+  async delete(username: string): Promise<User> {
+    return null;
+  }
+  
+  async search(username: string): Promise<User> {
+    return null;
+  }
+  
+  async refresh(username: string): Promise<User> {
+    return null;
+  }
 
 }

@@ -1,8 +1,8 @@
 import {Body, Controller, Request, Post, Query, UseGuards, SetMetadata,} from '@nestjs/common';
-import {JwtAuthGuard} from 'auth/guards/jwt-auth.guard';
 import {AdminRoleGuard, Public} from 'controllers/abstract.controller';
-import {Role, User, UserInput} from 'generator';
+import {User, UserInput} from 'generator';
 import {AuthService, UserService} from 'service';
+
 
 @Controller('/users')
 export class UserController {

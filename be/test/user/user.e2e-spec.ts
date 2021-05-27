@@ -8,31 +8,11 @@ import { User } from '../../src/models'
 
 import { AppModule } from '../../src/app.module'
 
-import { UserResolver } from '../../src/resolvers/user.resolver'
-
 import { END_POINT } from '../../src/environments'
 
 describe('UserModule (e2e)', () => {
 	let app: INestApplication
 	let userResolver
-
-	beforeEach(async () => {
-		const module: TestingModule = await Test.createTestingModule({
-			imports: [AppModule],
-			providers: [
-				UserResolver,
-				{
-					provide: getRepositoryToken(User),
-					useClass: Repository
-				},
-			]
-		}).compile()
-
-		userResolver = module.get<UserResolver>(UserResolver)
-
-		app = module.createNestApplication()
-		await app.init()
-	})
 
 	it('QUERY › users', () => {
 		return request(app.getHttpServer())
