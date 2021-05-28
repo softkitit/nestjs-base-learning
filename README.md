@@ -43,7 +43,7 @@
 1. Clone repository
 
 ```
-  git clone https://github.com/chnirt/nestjs-graphql-best-practice.git
+  git clone git@github.com:{your_user_name}/nestjs-base-learning.git
 ```
 
 2. Cd into directory
