@@ -1,5 +1,5 @@
-import {Body, Controller, Request, Post, Query, UseGuards, SetMetadata,} from '@nestjs/common';
-import {AdminRoleGuard, Public} from 'controllers/abstract.controller';
+import {Body, Controller, Request, Post, Query, UseGuards, SetMetadata, Get,} from '@nestjs/common';
+import {AnyRoleGuard, Public} from 'controllers/abstract.controller';
 import {User, UserInput} from 'generator';
 import {AuthService, UserService} from 'service';
 
@@ -28,8 +28,8 @@ export class UserController {
     return this.authService.login(ui.email, ui.password);
   }
 
-  @AdminRoleGuard
-  @Post('/me')
+  @AnyRoleGuard()
+  @Get('/me')
   async me(@Request() req): Promise<User> {
     const user = req.user;
     const userResult = await this.userService.findOneById(user.userId);

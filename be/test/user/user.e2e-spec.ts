@@ -12,21 +12,24 @@ import * as Repositories from 'repository';
 describe('AppModule (e2e)', () => {
   let app: INestApplication;
   let jwtService: JwtService;
+  let moduleFixture: TestingModule;
 
-  beforeEach(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule(metadata).compile();
+  beforeAll(async () => {
+    moduleFixture = await Test.createTestingModule(metadata).compile();
 
     app = moduleFixture.createNestApplication();
     await bootstrap(app);
     await app.init();
-    
+    jwtService = moduleFixture.get<any>(JwtService);
+
+  })
+
+  beforeEach(async () => {
     for (let repository in Repositories) {
       await moduleFixture.get<any>(Repositories[repository]).truncate();
     }
-
-    jwtService = moduleFixture.get<any>(JwtService);
   })
-
+  
 
   it('Signup & Login & WhoAmI call endpoints', async () => {
     const signupUser = getSignUpUser();
@@ -59,12 +62,11 @@ describe('AppModule (e2e)', () => {
     expect(decodeLoginUpToken.sub).toBe(decodeSignUpToken.sub);
 
     const whoAmIResponse = await request(httpServer)
-      .post(`/users/me`)
+      .get(`/users/me`)
       .set('Accept', 'application/json')
       .set('Authorization', `Bearer ${signupToken}`)
       .send()
-      // todo status must be 200 here
-      .expect(201);
+      .expect(200);
 
     const userResponse = whoAmIResponse.body as User;
     
@@ -102,7 +104,7 @@ describe('AppModule (e2e)', () => {
       });
     
     const whoamiWithoutAuth = await request(httpServer)
-      .post(`/users/me`)
+      .get(`/users/me`)
       .set('Accept', 'application/json')
       .send(signupUser).expect({
         statusCode: 401,
